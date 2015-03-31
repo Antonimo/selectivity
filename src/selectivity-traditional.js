@@ -12,7 +12,9 @@ function replaceSelectElement($el, options) {
         var $this = $(this);
         if ($this.is('option')) {
             var id = $this.attr('value') || $this.text();
-            if ($this.prop('selected')) {
+            
+            if ($this.prop('selected') && $this.attr('selected') !== void 0) {
+                
                 if (options.multiple) {
                     value.push(id);
                 } else {
@@ -37,21 +39,32 @@ function replaceSelectElement($el, options) {
     options.items = $el.children('option,optgroup').map(mapOptions).get();
 
     options.placeholder = options.placeholder || $el.data('placeholder') || '';
-
+    
     options.value = value;
 
     var classes = ($el.attr('class') || 'selectivity-input').split(' ');
     if (classes.indexOf('selectivity-input') === -1) {
         classes.push('selectivity-input');
     }
-
+    
+    var $parent = $el.parent();
+    var $input = $('<input type="hidden">').attr({
+        'name': $el.attr('name'),
+        'value': value
+    });
+    
     var $div = $('<div>').attr({
         'id': $el.attr('id'),
         'class': classes.join(' '),
         'style': $el.attr('style'),
         'data-name': $el.attr('name')
+        'style': $el.attr('style')
     });
     $el.replaceWith($div);
+    $parent.append($input);
+    $div.on('change', function (event) { //! good way to sync?
+        $input.val( event.value );
+    })
     return $div;
 }
 

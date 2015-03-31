@@ -27,7 +27,9 @@ function selectivity(methodName, options) {
     /* jshint validthis: true */
 
     var result;
-
+    
+    var $newCollection = $();
+    
     this.each(function() {
         var instance = this.selectivity;
 
@@ -70,11 +72,22 @@ function selectivity(methodName, options) {
                 }
 
                 this.selectivity = new InputType(options);
+                
+                $newCollection = $newCollection.add( this.selectivity.$el );
             }
         }
     });
 
-    return (result === undefined ? this : result);
+    if( result === undefined ){
+        
+        return this.pushStack(
+            $newCollection,
+            "selectivity",
+            [methodName, options]
+        );
+    }
+
+    return result;
 }
 
 /**
@@ -412,6 +425,7 @@ $.extend(Selectivity.prototype, {
 
         if (!this.dropdown) {
             if (this.triggerEvent('selectivity-opening')) {
+                
                 var Dropdown = this.options.dropdown || Selectivity.Dropdown;
                 if (Dropdown) {
                     this.dropdown = new Dropdown({
@@ -572,11 +586,14 @@ $.extend(Selectivity.prototype, {
     setOptions: function(options) {
 
         options = options || {};
-
+        
+        // console.log(this.$el);
+        // console.log( Selectivity.OptionListeners );
+        
         Selectivity.OptionListeners.forEach(function(listener) {
             listener(this, options);
         }.bind(this));
-
+        
         $.extend(this.options, options);
 
         var allowedTypes = $.extend({
@@ -591,7 +608,7 @@ $.extend(Selectivity.prototype, {
             removeOnly: 'boolean',
             searchInputListeners: 'array'
         }, options.allowedTypes);
-
+        
         $.each(options, function(key, value) {
             var type = allowedTypes[key];
             if (type && !type.split('|').some(function(type) { return $.type(value) === type; })) {
@@ -616,7 +633,8 @@ $.extend(Selectivity.prototype, {
                 break;
             }
         }.bind(this));
-
+        
+        
         this.enabled = (!this.options.readOnly && !this.options.removeOnly);
     },
 

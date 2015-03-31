@@ -24,7 +24,11 @@ function MultipleSelectivity(options) {
     this._highlightedItemId = null;
 
     this.initSearchInput(this.$('.selectivity-multiple-input:not(.selectivity-width-detector)'));
-
+    
+    console.log( this.items );
+    console.log( this._data );
+    console.log( this._value );
+    
     this._rerenderSelection();
 
     if (!options.positionDropdown) {
@@ -439,7 +443,7 @@ var callSuper = Selectivity.inherits(MultipleSelectivity, {
     },
 
     _renderSelectedItem: function(item) {
-
+        console.log( 'item ');
         this.$searchInput.before(this.template('multipleSelectedItem', $.extend({
             highlighted: (item.id === this._highlightedItemId),
             removable: !this.options.readOnly
