@@ -210,8 +210,6 @@ var callSuper = Selectivity.inherits(FreeSingleSelectivity, {
      */
     _resultSelected: function(event) {
         
-        console.log( ' _resultSelected', event );
-        
         this.data(event.item);
 
         this.close();

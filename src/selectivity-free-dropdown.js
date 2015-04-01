@@ -50,11 +50,8 @@ var callSuper = Selectivity.inherits(SelectivityFreeDropdown, SelectivityDropdow
 
 	selectNewItem: function () {
 		
-		//! get Text as-is
 		var text = this.selectivity.$searchInput.val();
 		var options = { id: text, item: text };
-		
-		console.log( 'selectNewItem', options );
 		
 		if (this.selectivity.triggerEvent('selectivity-selecting', options)) {
 		    this.selectivity.triggerEvent('selectivity-selected', options);

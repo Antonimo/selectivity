@@ -8,21 +8,11 @@ var MultipleSelectivity = require('./selectivity-multiple');
 
 function createFreeItem(token) {
     
-    console.log('createFreeItem', token);
-    console.log('trim', token.trim());
-    
-    var a  = 1;
-    
-    token.trim() ? a = 22 : a = 33;
-    
-    console.log('a', a);
-    
     return (token.trim() ? { id: token, text: token } : null);
 }
 
 function freeItemTokenizer(input, selection, createToken) {
     
-    console.log('freeItemTokenizer:', input, '|', selection);
     
     function hasToken(input) {
         
@@ -108,7 +98,6 @@ var callSuper = Selectivity.inherits(FreeMultiple, MultipleSelectivity, {
         $input.on('blur', function() {
             var term = $input.val();
             // this.add(createFreeItem(term));
-            console.log( this._data );
         }.bind(this));
     },
 
