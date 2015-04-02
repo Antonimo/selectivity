@@ -8,11 +8,14 @@ var MultipleSelectivity = require('./selectivity-multiple');
 
 function createFreeItem(token) {
     
+    console.log('createFreeItem', token);
+    
     return (token.trim() ? { id: token, text: token } : null);
 }
 
 function freeItemTokenizer(input, selection, createToken) {
     
+    console.log('freeItemTokenizer', input, selection, createToken);
     
     function hasToken(input) {
         

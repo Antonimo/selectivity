@@ -48,59 +48,59 @@ var callSuper = Selectivity.inherits(SelectivityFreeDropdown, SelectivityDropdow
 	},
 
 
-	selectNewItem: function () {
+	// selectNewItem: function () {
 		
-		var text = this.selectivity.$searchInput.val();
-		var options = { id: text, item: text };
+	// 	var text = this.selectivity.$searchInput.val();
+	// 	var options = { id: text, item: text };
 		
-		if (this.selectivity.triggerEvent('selectivity-selecting', options)) {
-		    this.selectivity.triggerEvent('selectivity-selected', options);
-		}
-	},
+	// 	if (this.selectivity.triggerEvent('selectivity-selecting', options)) {
+	// 	    this.selectivity.triggerEvent('selectivity-selected', options);
+	// 	}
+	// },
 
-	/**
-	 * @inherit
-	 */
-	selectHighlight: function() {
+	// /**
+	//  * @inherit
+	//  */
+	// selectHighlight: function() {
 		
-		callSuper(this, 'selectHighlight');
-		return;
+	// 	callSuper(this, 'selectHighlight');
+	// 	return;
 		
-	    /*
-		    text is empty ""
-		      default action: select highlighted
-		    text is partial:  text != tag
-		      new item { text }
-		    text is tag:  text == tag
-		      default action: select highlighted
-		    text is none: tag not found
-		      new item {text}
-	    */
+	//     /*
+	// 	    text is empty ""
+	// 	      default action: select highlighted
+	// 	    text is partial:  text != tag
+	// 	      new item { text }
+	// 	    text is tag:  text == tag
+	// 	      default action: select highlighted
+	// 	    text is none: tag not found
+	// 	      new item {text}
+	//     */
 	    
-	    //! getTerm?
+	//     //! getTerm?
 	    
-	    var term = this.selectivity.term;
+	//     var term = this.selectivity.term;
 	    
-	    if( term.trim().length < 1 ){
-	    	callSuper(this, 'selectHighlight');
-	    	return;
-	    }
-	    if (this.highlightedResult) {
+	//     if( term.trim().length < 1 ){
+	//     	callSuper(this, 'selectHighlight');
+	//     	return;
+	//     }
+	//     if (this.highlightedResult) {
 	    	
-	    	if( Selectivity.transformText(this.highlightedResult.text) == term ){
-	    		callSuper(this, 'selectHighlight');
-	    		return;
-	    	}
-	    }
+	//     	if( Selectivity.transformText(this.highlightedResult.text) == term ){
+	//     		callSuper(this, 'selectHighlight');
+	//     		return;
+	//     	}
+	//     }
 	    
-	    this.selectNewItem();
+	//     this.selectNewItem();
 	    
-	    //! what this does?
+	//     //! what this does?
 	    
-	    // else if (this.loadMoreHighlighted) {
-	    //     this._loadMoreClicked();
-	    // }
-	}
+	//     // else if (this.loadMoreHighlighted) {
+	//     //     this._loadMoreClicked();
+	//     // }
+	// }
 	
 });
 

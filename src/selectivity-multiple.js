@@ -327,9 +327,10 @@ var callSuper = Selectivity.inherits(MultipleSelectivity, {
 
         var term = this.$searchInput.val();
         var createTokenItem = this.options.createTokenItem;
-
+        
         if (term && createTokenItem) {
             var item = createTokenItem(term);
+            
             if (item) {
                 this.add(item);
             }

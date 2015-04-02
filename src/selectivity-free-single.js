@@ -18,6 +18,8 @@ function FreeSingleSelectivity(options) {
 
     this._rerenderSelection();
     
+    console.log( 'free', options ); 
+    
     //! options.sticky
     // this.items.push({id:'other',text:'other'});
 
@@ -109,9 +111,12 @@ var callSuper = Selectivity.inherits(FreeSingleSelectivity, {
             showSearchInputInDropdown: 'boolean'
         });
         
-        options = $.extend({
-            dropdown: Selectivity.FreeDropdown
-        }, options);
+        options.dropdown = Selectivity.FreeDropdown;
+        
+        //! why i cant do this??
+        // options = $.extend({
+        //     dropdown: Selectivity.FreeDropdown
+        // }, options);
 
         callSuper(this, 'setOptions', options);
     },
@@ -199,8 +204,15 @@ var callSuper = Selectivity.inherits(FreeSingleSelectivity, {
             options.noResults = true;
         }
         
-        //! sticky?
-        results.push( {id:'other',text:'other'} );
+        if( this.options.sticky ){
+            var sticky = this.getItemForId( this.options.sticky );
+            if( sticky ){
+                results = results.filter(function (el) {
+                    return el.id !== sticky.id;
+                });
+                results.push( sticky );
+            }
+        }
         
         callSuper(this, '_setResults', results, options);
     },
