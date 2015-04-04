@@ -18,7 +18,7 @@ function FreeSingleSelectivity(options) {
 
     this._rerenderSelection();
     
-    console.log( 'free', options ); 
+    // console.log( 'free', options ); 
     
     //! options.sticky
     // this.items.push({id:'other',text:'other'});
